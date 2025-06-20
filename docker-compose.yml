@@ -1,0 +1,14 @@
+# docker run -p 58090:8090 -v `pwd`/data:/opt/fluree-server/data -v `pwd`/resources:/opt/fluree-server/resources fluree/server:latest --profile="docker" --config="./resources/config-closed-mode.jsonld"
+
+services:
+  fluree:
+    image: fluree/server:latest
+    container_name: fluree-closed-mode
+    ports:
+      - '8090:8090'
+    command: >
+      --profile="docker"
+      --config="./resources/config-open-mode.jsonld"
+    volumes:
+      - ./data:/opt/fluree-server/data
+      - ./resources:/opt/fluree-server/resources

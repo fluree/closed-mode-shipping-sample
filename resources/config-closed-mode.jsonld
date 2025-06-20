@@ -1,0 +1,75 @@
+{
+  "@context": {
+    "@base": "https://ns.flur.ee/config/main/",
+    "@vocab": "https://ns.flur.ee/system#",
+    "profiles": {
+      "@container": [
+        "@graph",
+        "@index"
+      ]
+    }
+  },
+  "@id": "standaloneServer",
+  "@graph": [
+    {
+      "@id": "localDiskStorage",
+      "@type": "Storage",
+      "filePath": "/opt/fluree-server/data"
+    },
+    {
+      "@id": "connection",
+      "@type": "Connection",
+      "parallelism": 8,
+      "cacheMaxMb": 1000,
+      "commitStorage": {
+        "@id": "localDiskStorage"
+      },
+      "indexStorage": {
+        "@id": "localDiskStorage"
+      },
+      "primaryPublisher": {
+        "@type": "Publisher",
+        "storage": {
+          "@id": "localDiskStorage"
+        }
+      },
+      "defaults": {
+        "indexing": {
+          "reindexMinBytes": 1000000,
+          "reindexMaxBytes": 1000000000,
+          "maxOldIndexes": 3
+        }
+      }
+    },
+    {
+      "@id": "consensus",
+      "@type": "Consensus",
+      "consensusProtocol": "standalone",
+      "maxPendingTxns": 512,
+      "connection": {
+        "@id": "connection"
+      }
+    },
+    {
+      "@id": "http",
+      "@type": "API",
+      "httpPort": 8090,
+      "maxTxnWaitMs": 120000,
+
+      "rootIdentities": ["did:fluree:Tf4KTeKpWcZAJadKfJ4JUv84dkBYy5KFHod"],
+      "closedMode": true
+    }
+  ],
+  "profiles": {
+    "dev": [
+      {
+        "@id": "connection",
+        "cacheMaxMb": 200
+      },
+      {
+        "@id": "consensus",
+        "maxPendingTxns": 16
+      }
+    ]
+  }
+}

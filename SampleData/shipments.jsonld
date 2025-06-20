@@ -1,0 +1,118 @@
+{
+    "ledger": "shipping-sample",
+    "@context": {
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "location": { "@type": "@id" },
+        "company": { "@type": "@id" },
+        "fromLocation": { "@type": "@id" },
+        "toLocation": { "@type": "@id" },
+        "status": { "@type": "@id" },
+        "initiatedBy": { "@type": "@id" },
+        "items": { "@type": "@id", "@container": "@set" },
+        "shippedDate": { "@type": "xsd:dateTime" },
+        "deliveredDate": { "@type": "xsd:dateTime" }
+    },
+    "insert": [
+        {
+            "@id": "shipmentStatus/1",
+            "@type": "ShipmentStatus",
+            "label": "Pending"
+        },
+        {
+            "@id": "shipmentStatus/2",
+            "@type": "ShipmentStatus",
+            "label": "In Transit"
+        },
+        {
+            "@id": "shipmentStatus/3",
+            "@type": "ShipmentStatus",
+            "label": "Delivered"
+        },
+        {
+            "@id": "shipment/1",
+            "@type": "Shipment",
+            "trackingNumber": "SH-2024-001234",
+            "fromLocation": "location/1",
+            "toLocation": "location/2",
+            "items": [
+                "item/1",
+                "item/2"
+            ],
+            "initiatedBy": "user/1",
+            "status": "shipmentStatus/3",
+            "shippedDate": "2024-06-01T16:00:00Z",
+            "deliveredDate": "2024-06-03T10:30:00Z"
+        },
+        {
+            "@id": "shipment/2",
+            "@type": "Shipment",
+            "trackingNumber": "SH-2024-001235",
+            "fromLocation": "location/2",
+            "toLocation": "location/3",
+            "items": [
+                "item/1",
+                "item/3"
+            ],
+            "initiatedBy": "user/2",
+            "status": "shipmentStatus/2",
+            "shippedDate": "2024-06-08T09:15:00Z",
+            "deliveredDate": null
+        },
+        {
+            "@id": "shipment/3",
+            "@type": "Shipment",
+            "trackingNumber": "SH-2024-001236",
+            "fromLocation": "location/3",
+            "toLocation": "location/4",
+            "items": [
+                "item/1"
+            ],
+            "initiatedBy": "user/4",
+            "status": "shipmentStatus/2",
+            "shippedDate": "2024-06-11T08:45:00Z",
+            "deliveredDate": null
+        },
+        {
+            "@id": "shipment/4",
+            "@type": "Shipment",
+            "trackingNumber": "SH-2024-001237",
+            "fromLocation": "location/1",
+            "toLocation": "location/2",
+            "items": [
+                "item/3"
+            ],
+            "initiatedBy": "user/1",
+            "status": "shipmentStatus/2",
+            "shippedDate": "2024-06-02T15:30:00Z",
+            "deliveredDate": null
+        },
+        {
+            "@id": "shipment/5",
+            "@type": "Shipment",
+            "trackingNumber": "SH-2024-001238",
+            "fromLocation": "location/2",
+            "toLocation": "location/1",
+            "items": [
+                "item/4"
+            ],
+            "initiatedBy": "user/2",
+            "status": "shipmentStatus/1",
+            "shippedDate": null,
+            "deliveredDate": null
+        },
+        {
+            "@id": "shipment/6",
+            "@type": "Shipment",
+            "trackingNumber": "SH-2024-001239",
+            "fromLocation": "location/1",
+            "toLocation": "location/3",
+            "items": [
+                "item/2"
+            ],
+            "initiatedBy": "user/1",
+            "status": "shipmentStatus/2",
+            "shippedDate": "2024-06-12T14:30:00Z",
+            "deliveredDate": null
+        }
+    ]
+}

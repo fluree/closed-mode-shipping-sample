@@ -1,0 +1,45 @@
+{
+    "ledger": "shipping-sample",
+    "@context": {
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "location": { "@type": "@id" },
+        "company": { "@type": "@id" },
+        "fromLocation": { "@type": "@id" },
+        "toLocation": { "@type": "@id" },
+        "status": { "@type": "@id" },
+        "initiatedBy": { "@type": "@id" },
+        "items": { "@type": "@id", "@container": "@set" },
+        "shippedDate": { "@type": "xsd:dateTime" },
+        "deliveredDate": { "@type": "xsd:dateTime" }
+    },
+    "insert": [
+        {
+            "@id": "location/1",
+            "@type": "Location",
+            "name": "ACME Textiles Factory",
+            "type": "Factory",
+            "city": "Charlotte, NC"
+        },
+        {
+            "@id": "location/2",
+            "@type": "Location",
+            "name": "Central Distribution Warehouse",
+            "type": "Warehouse",
+            "city": "Atlanta, GA"
+        },
+        {
+            "@id": "location/3",
+            "@type": "Location",
+            "name": "Southeast Regional Hub",
+            "type": "Distribution Hub",
+            "city": "Jacksonville, FL"
+        },
+        {
+            "@id": "location/4",
+            "@type": "Location",
+            "name": "Miami Local Depot",
+            "type": "Local Depot",
+            "city": "Miami, FL"
+        }
+    ]
+}

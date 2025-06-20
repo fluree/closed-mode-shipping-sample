@@ -1,0 +1,53 @@
+{
+    "ledger": "shipping-sample",
+    "@context": {
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "location": { "@type": "@id" },
+        "company": { "@type": "@id" },
+        "fromLocation": { "@type": "@id" },
+        "toLocation": { "@type": "@id" },
+        "status": { "@type": "@id" },
+        "initiatedBy": { "@type": "@id" },
+        "items": { "@type": "@id", "@container": "@set" },
+        "shippedDate": { "@type": "xsd:dateTime" },
+        "deliveredDate": { "@type": "xsd:dateTime" }
+    },
+    "insert": [
+        {
+            "@id": "user/1",
+            "@type": "User",
+            "name": "Alice Chen",
+            "role": "Factory Manager",
+            "email": "alice.chen@acme-textiles.com",
+            "company": "acme-textiles",
+            "location": "location/1"
+        },
+        {
+            "@id": "user/2",
+            "@type": "User",
+            "name": "Bob Rodriguez",
+            "role": "Warehouse Supervisor",
+            "email": "bob.rodriguez@central-dist.com",
+            "company": "central-distribution",
+            "location": "location/2"
+        },
+        {
+            "@id": "user/3",
+            "@type": "User",
+            "name": "Carol Kim",
+            "role": "Shipping Clerk",
+            "email": "carol.kim@central-dist.com",
+            "company": "central-distribution",
+            "location": "location/2"
+        },
+        {
+            "@id": "user/4",
+            "@type": "User",
+            "name": "David Patel",
+            "role": "Regional Hub Manager",
+            "email": "david.patel@fastship.com",
+            "company": "fastship-logistics",
+            "location": "location/3"
+        }
+    ]
+}

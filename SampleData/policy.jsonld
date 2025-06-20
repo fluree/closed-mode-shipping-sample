@@ -1,0 +1,211 @@
+{
+    "ledger": "shipping-sample",
+    "@context": {
+        "f": "https://ns.flur.ee/ledger#"
+    },
+    "insert": [
+        {
+            "@id": "policy/root",
+            "@type": [
+                "Policy",
+                "RootPolicyClass"
+            ],
+            "f:action": [
+                {
+                    "@id": "f:modify"
+                },
+                {
+                    "@id": "f:view"
+                }
+            ],
+            "f:query": {
+                "@type": "@json",
+                "@value": {}
+            }
+        },
+        {
+            "@id": "policy/readAll",
+            "@type": [
+                "Policy",
+                "UserPolicyClass"
+            ],
+            "f:required": false,
+            "f:action": [
+                {
+                    "@id": "f:view"
+                }
+            ],
+            "f:query": {
+                "@type": "@json",
+                "@value": {}
+            }
+        },
+        {
+            "@id": "policy/readShipments",
+            "@type": [
+                "Policy",
+                "UserPolicyClass"
+            ],
+            "f:required": true,
+            "f:targetSubject": {
+                "@type": "@json",
+                "@value": {
+                    "where": {
+                        "@id": "?$target",
+                        "@type": "Shipment"
+                    }
+                }
+            },
+            "f:action": [
+                {
+                    "@id": "f:view"
+                }
+            ],
+            "f:query": {
+                "@type": "@json",
+                "@value": {
+                    "@context": {
+                        "identity": {
+                            "@reverse": "user"
+                        },
+                        "employee": {
+                            "@reverse": "location"
+                        }
+                    },
+                    "where": [
+                        [
+                            "union",
+                            {
+                                "@id": "?$this",
+                                "initiatedBy": {
+                                    "identity": "?$identity"
+                                }
+                            },
+                            {
+                                "@id": "?$this",
+                                "fromLocation": {
+                                    "employee": {
+                                        "identity": "?$identity"
+                                    }
+                                }
+                            },
+                            {
+                                "@id": "?$this",
+                                "toLocation": {
+                                    "employee": {
+                                        "identity": "?$identity"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                }
+            }
+        },
+        {
+            "@id": "policy/updateShipments",
+            "@type": [
+                "Policy",
+                "UserPolicyClass"
+            ],
+            "f:required": true,
+            "f:targetSubject": {
+                "@type": "@json",
+                "@value": {
+                    "where": {
+                        "@id": "?$target",
+                        "@type": "Shipment"
+                    }
+                }
+            },
+            "f:action": [
+                {
+                    "@id": "f:modify"
+                }
+            ],
+            "f:query": {
+                "@type": "@json",
+                "@value": {
+                    "@context": {
+                        "identity": {
+                            "@reverse": "user"
+                        },
+                        "employee": {
+                            "@reverse": "location"
+                        },
+                        "status": { "@type": "@id" }
+                    },
+                    "where": [
+                        [
+                            "union", 
+                            {
+                                "@id": "?$this",
+                                "status": {
+                                    "@id": "shipmentStatus/2"},
+                                "toLocation": {
+                                    "employee": {
+                                        "identity": "?$identity"
+                                    }
+                                }
+                            },
+                            {
+                                "@id": "?$this",
+                                "status": "shipmentStatus/1",
+                                "fromLocation": {
+                                    "employee": {
+                                        "identity": "?$identity"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                }
+            }
+        },
+        {
+            "@id": "did:fluree:Tf4KTeKpWcZAJadKfJ4JUv84dkBYy5KFHod",
+            "f:policyClass": {
+                "@id": "RootPolicyClass"
+            },
+            "user": {
+                "@id": "user/root"
+            }
+        },
+        {
+            "@id": "did:fluree:Tf5Z5F4u8nmccw2cmhYxfpSPAbpi8yoVBFZ",
+            "f:policyClass": {
+                "@id": "UserPolicyClass"
+            },
+            "user": {
+                "@id": "user/1"
+            }
+        },
+        {
+            "@id": "did:fluree:Tf14ycJ2bB9ty3aXxCoZpoUuj5hN21g328t",
+            "f:policyClass": {
+                "@id": "UserPolicyClass"
+            },
+            "user": {
+                "@id": "user/2"
+            }
+        },
+        {
+            "@id": "did:fluree:Tf4BJt2j6JoUYGSSwr5SvRt8mz1pHYFdERg",
+            "f:policyClass": {
+                "@id": "UserPolicyClass"
+            },
+            "user": {
+                "@id": "user/3"
+            }
+        },
+        {
+            "@id": "did:fluree:TezE9Vhwrctc275D2PVdf1iw1UcXgcrQMNo",
+            "f:policyClass": {
+                "@id": "UserPolicyClass"
+            },
+            "user": {
+                "@id": "user/4"
+            }
+        }
+    ]
+}

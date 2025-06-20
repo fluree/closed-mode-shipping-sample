@@ -1,0 +1,53 @@
+{
+    "ledger": "shipping-sample",
+    "@context": {
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "location": { "@type": "@id" },
+        "company": { "@type": "@id" },
+        "fromLocation": { "@type": "@id" },
+        "toLocation": { "@type": "@id" },
+        "status": { "@type": "@id" },
+        "initiatedBy": { "@type": "@id" },
+        "items": { "@type": "@id", "@container": "@set" },
+        "shippedDate": { "@type": "xsd:dateTime" },
+        "deliveredDate": { "@type": "xsd:dateTime" }
+    },
+    "insert": [
+        {
+            "@id": "item/1",
+            "@type": "Item",
+            "sku": "TSH-001-BLU-M",
+            "name": "Classic Cotton T-Shirt",
+            "description": "100% cotton crew neck t-shirt",
+            "color": "Blue",
+            "size": "Medium"
+        },
+        {
+            "@id": "item/2",
+            "@type": "Item",
+            "sku": "TSH-001-RED-L",
+            "name": "Classic Cotton T-Shirt",
+            "description": "100% cotton crew neck t-shirt",
+            "color": "Red",
+            "size": "Large"
+        },
+        {
+            "@id": "item/3",
+            "@type": "Item",
+            "sku": "TSH-002-GRN-S",
+            "name": "Organic Cotton T-Shirt",
+            "description": "100% organic cotton eco-friendly t-shirt",
+            "color": "Green",
+            "size": "Small"
+        },
+        {
+            "@id": "item/4",
+            "@type": "Item",
+            "sku": "TSH-001-BLK-XL",
+            "name": "Classic Cotton T-Shirt",
+            "description": "100% cotton crew neck t-shirt",
+            "color": "Black",
+            "size": "X-Large"
+        }
+    ]
+}
