@@ -1,7 +1,6 @@
 import { Package, MapPin, User as UserIcon, CheckCircle, Clock, Truck } from 'lucide-react';
 
 import type { Shipment, ShipmentStatus, Location, Item, User, Entity } from './types';
-// import { useCallback, useMemo } from 'react';
 
 type ShippingDashboardProps = {
     isLoading: boolean;
@@ -22,13 +21,11 @@ const ShippingDashboard = ({ isLoading, shipments, locations, items, users, logg
 
     // Check if user can confirm receipt of a shipment
     const canConfirmReceipt = (shipment: Shipment) => {
-        // return shipment.status === "In Transit" && shipment.toLocation.id === user.location.id;
         return shipment.status === "In Transit";
     };
 
     // Check if user can ship out a pending shipment
     const canShipOut = (shipment: Shipment) => {
-        // return shipment.status === "Pending" && shipment.fromLocation.id === user.location.id;
         return shipment.status === "Pending";
     };
 

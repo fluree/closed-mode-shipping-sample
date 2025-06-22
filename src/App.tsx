@@ -1,8 +1,18 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import './App.css'
-import ShippingDashboard from './ShippingDashboard/ShippingDashboard'
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import './App.css';
+import ShippingDashboard from './ShippingDashboard/ShippingDashboard';
+import Notification from './ShippingDashboard/notification';
 import FlureeClient from '@fluree/fluree-client';
 import type { Item, Location, Shipment, User } from './ShippingDashboard/types';
+
+const getMessageFromError = (err: unknown) => {
+  if (err && typeof err === "object" && "body" in err && err.body && typeof err.body === "object" && "message" in err.body) {
+    // Now TypeScript knows err.body.message exists
+    return (err as { body: { message: string } }).body.message;
+  } else {
+    return "Unknown error";
+  }
+}
 
 function App() {
   const [shipments, setShipments] = useState<Shipment[]>([]);
@@ -12,6 +22,13 @@ function App() {
 
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [shouldReload, setShouldReload] = useState<boolean>(false);
+
+  const [showNotification, setShowNotification] = useState<boolean>(false);
+  const [notificationSuccess, setNotificationSuccess] = useState<boolean>(true);
+  const [notificationTitle, setNotificationTitle] = useState<string>("");
+  const [notificationDetail, setNotificationDetail] = useState<string>("");
+  const onCloseNotification = () => { setShowNotification(false); };
 
 
   // The keys below are for the sample users in this demo. In a real application, you would manage these keys securely.
@@ -136,6 +153,9 @@ function App() {
   }, [flureeClient]);
 
   useEffect(() => {
+    if (shouldReload) {
+      setShouldReload(false);
+    }
     if (isLoading) {
       // Prevent multiple fetches
       return;
@@ -143,30 +163,53 @@ function App() {
     setIsLoading(true);
     fetchData();
     setIsLoading(false);
-  }, [fetchData, isLoading]);
+  }, [fetchData, isLoading, shouldReload]);
 
   const updateShipment = useCallback(async (shipmentId: string, updates: Partial<Shipment>) => {
     const client = await flureeClient;
     const nonEmptyUpdates = Object.fromEntries(
       Object.entries(updates).filter(([, value]) => value !== undefined && value !== null)
     );
-    client.upsert({ 
+    const upsertTransaction = client.upsert({ 
       id: shipmentId,
       ...nonEmptyUpdates
-    }).send();
+    });
+    try {
+      await upsertTransaction.send();
+      setShowNotification(true);
+      setNotificationSuccess(true);
+      setNotificationTitle("Success");
+      setNotificationDetail("Shipment updated");
+
+      setShouldReload(true);
+    } catch (err: unknown) {
+      setShowNotification(true);
+      setNotificationSuccess(false);
+      setNotificationTitle("Failure");
+      setNotificationDetail(getMessageFromError(err));
+    }
   }, [flureeClient]);
 
   return (
-    <ShippingDashboard 
-      isLoading={isLoading}
-      shipments={shipments} 
-      locations={locations} 
-      items={items} 
-      users={users} 
-      loggedInUser={loggedInUser} 
-      setLoggedInUser={setLoggedInUser} 
-      updateShipment={updateShipment} 
-    />
+    <>
+      <ShippingDashboard 
+        isLoading={isLoading}
+        shipments={shipments} 
+        locations={locations} 
+        items={items} 
+        users={users} 
+        loggedInUser={loggedInUser} 
+        setLoggedInUser={setLoggedInUser} 
+        updateShipment={updateShipment} 
+      />
+      <Notification 
+        show={showNotification}
+        handleClose={onCloseNotification}
+        success={notificationSuccess}
+        title={notificationTitle}
+        detail={notificationDetail}
+      />
+    </>
   )
 }
 

@@ -109,6 +109,7 @@
                 "UserPolicyClass"
             ],
             "f:required": true,
+            "f:exMessage": "Not authorized to update this shipment.",
             "f:targetSubject": {
                 "@type": "@json",
                 "@value": {
