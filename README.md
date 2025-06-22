@@ -13,6 +13,10 @@ Please see the set up instructions in [Getting Started](#getting-started) for mo
 - Example configuration, startup script, and seed data and policies for running a sample ledger on `fluree/server` in closed mode.
 - Example client application that demonstrates how to use the `fluree-client` SDK to sign messages sent to `fluree/server`.
 
+## Key Documentation Resources
+- [Policy Syntax Reference](https://developers.flur.ee/docs/reference/policy-syntax)
+- [`fluree-client` SDK Documentation](https://github.com/fluree/fluree-client?tab=readme-ov-file#flureefluree-client)
+
 ## Prerequisites
 1. [Node and NPM](https://nodejs.org/en/download)
 2. Docker Desktop ([Mac](https://docs.docker.com/desktop/setup/install/mac-install/), [Windows](https://docs.docker.com/desktop/setup/install/windows-install/), [Linux](https://docs.docker.com/desktop/setup/install/linux/))
