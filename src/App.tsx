@@ -74,7 +74,6 @@ function App() {
         "company": { "@type": "@id" },
         "fromLocation": { "@type": "@id" },
         "toLocation": { "@type": "@id" },
-        "status": { "@type": "@id" },
         "initiatedBy": { "@type": "@id" },
         "items": { "@type": "@id", "@container": "@set" },
         "shippedDate": { "@type": "xsd:dateTime" },
@@ -96,7 +95,7 @@ function App() {
           "toLocation",
           "items",
           "initiatedBy",
-          {"status": ["id", "label"]},
+          "status",
           "shippedDate",
           "deliveredDate"
         ] },

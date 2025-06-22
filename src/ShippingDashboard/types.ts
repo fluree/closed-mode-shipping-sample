@@ -22,9 +22,7 @@ export type Shipment = {
     shippedDate: string | null;
     deliveredDate: string | null;
 };
-export type ShipmentStatus = Entity & {
-    "label": "Pending" | "In Transit" | "Delivered";
-}
+export type ShipmentStatus = "Pending" | "In Transit" | "Delivered";
 
 export type Location = {
     id: string;

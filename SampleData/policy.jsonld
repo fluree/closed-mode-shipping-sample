@@ -132,16 +132,14 @@
                         },
                         "employee": {
                             "@reverse": "location"
-                        },
-                        "status": { "@type": "@id" }
+                        }
                     },
                     "where": [
                         [
                             "union", 
                             {
                                 "@id": "?$this",
-                                "status": {
-                                    "@id": "shipmentStatus/2"},
+                                "status": "Delivered",
                                 "toLocation": {
                                     "employee": {
                                         "identity": "?$identity"
@@ -150,7 +148,7 @@
                             },
                             {
                                 "@id": "?$this",
-                                "status": "shipmentStatus/1",
+                                "status": "In Transit",
                                 "fromLocation": {
                                     "employee": {
                                         "identity": "?$identity"

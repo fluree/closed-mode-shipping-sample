@@ -6,28 +6,12 @@
         "company": { "@type": "@id" },
         "fromLocation": { "@type": "@id" },
         "toLocation": { "@type": "@id" },
-        "status": { "@type": "@id" },
         "initiatedBy": { "@type": "@id" },
         "items": { "@type": "@id", "@container": "@set" },
         "shippedDate": { "@type": "xsd:dateTime" },
         "deliveredDate": { "@type": "xsd:dateTime" }
     },
     "insert": [
-        {
-            "@id": "shipmentStatus/1",
-            "@type": "ShipmentStatus",
-            "label": "Pending"
-        },
-        {
-            "@id": "shipmentStatus/2",
-            "@type": "ShipmentStatus",
-            "label": "In Transit"
-        },
-        {
-            "@id": "shipmentStatus/3",
-            "@type": "ShipmentStatus",
-            "label": "Delivered"
-        },
         {
             "@id": "shipment/1",
             "@type": "Shipment",
@@ -39,7 +23,7 @@
                 "item/2"
             ],
             "initiatedBy": "user/1",
-            "status": "shipmentStatus/3",
+            "status": "Delivered",
             "shippedDate": "2024-06-01T16:00:00Z",
             "deliveredDate": "2024-06-03T10:30:00Z"
         },
@@ -54,7 +38,7 @@
                 "item/3"
             ],
             "initiatedBy": "user/2",
-            "status": "shipmentStatus/2",
+            "status": "In Transit",
             "shippedDate": "2024-06-08T09:15:00Z",
             "deliveredDate": null
         },
@@ -68,7 +52,7 @@
                 "item/1"
             ],
             "initiatedBy": "user/4",
-            "status": "shipmentStatus/2",
+            "status": "In Transit",
             "shippedDate": "2024-06-11T08:45:00Z",
             "deliveredDate": null
         },
@@ -82,7 +66,7 @@
                 "item/3"
             ],
             "initiatedBy": "user/1",
-            "status": "shipmentStatus/2",
+            "status": "In Transit",
             "shippedDate": "2024-06-02T15:30:00Z",
             "deliveredDate": null
         },
@@ -96,7 +80,7 @@
                 "item/4"
             ],
             "initiatedBy": "user/2",
-            "status": "shipmentStatus/1",
+            "status": "Pending",
             "shippedDate": null,
             "deliveredDate": null
         },
@@ -110,7 +94,7 @@
                 "item/2"
             ],
             "initiatedBy": "user/1",
-            "status": "shipmentStatus/2",
+            "status": "In Transit",
             "shippedDate": "2024-06-12T14:30:00Z",
             "deliveredDate": null
         }

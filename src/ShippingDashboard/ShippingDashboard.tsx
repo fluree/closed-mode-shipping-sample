@@ -23,28 +23,28 @@ const ShippingDashboard = ({ isLoading, shipments, locations, items, users, logg
     // Check if user can confirm receipt of a shipment
     const canConfirmReceipt = (shipment: Shipment) => {
         // return shipment.status === "In Transit" && shipment.toLocation.id === user.location.id;
-        return shipment.status.label === "In Transit";
+        return shipment.status === "In Transit";
     };
 
     // Check if user can ship out a pending shipment
     const canShipOut = (shipment: Shipment) => {
         // return shipment.status === "Pending" && shipment.fromLocation.id === user.location.id;
-        return shipment.status.label === "Pending";
+        return shipment.status === "Pending";
     };
 
     // Confirm receipt handler
     const handleConfirmReceipt = (shipmentId: string) => {
-        updateShipment(shipmentId, { status: { id: "shippingStatus/3", label: 'Delivered' }, deliveredDate: new Date().toISOString() });
+        updateShipment(shipmentId, { status: "Delivered", deliveredDate: new Date().toISOString() });
     };
 
     // Ship out handler
     const handleShipOut = (shipmentId: string) => {
-        updateShipment(shipmentId, { status: { id: "shippingStatus/2", label: 'In Transit' }, shippedDate: new Date().toISOString() });
+        updateShipment(shipmentId, { status: "In Transit", shippedDate: new Date().toISOString() });
     };
 
     // Status icon component
     const StatusIcon = ({ status }: { status: ShipmentStatus }) => {
-        switch (status.label) {
+        switch (status) {
             case "Delivered":
                 return <CheckCircle className="w-5 h-5 text-green-600" />;
             case "In Transit":
@@ -161,7 +161,7 @@ const ShippingDashboard = ({ isLoading, shipments, locations, items, users, logg
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <div className="flex items-center space-x-2">
                                                         <StatusIcon status={shipment.status} />
-                                                        <span className="text-sm text-gray-900">{shipment.status.label}</span>
+                                                        <span className="text-sm text-gray-900">{shipment.status}</span>
                                                     </div>
                                                 </td>
                                                 <td className="px-6 py-4 text-sm text-gray-900">
